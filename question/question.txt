@@ -1,0 +1,2 @@
+flume source 读取源数据文件在多层子目录下如何读取
+flume source 读取文件为何不每个文件所有行的数据组装json推一个event

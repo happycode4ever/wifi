@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.jj.wifi</groupId>
+    <artifactId>wifi-root</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>wifi-common</module>
+        <module>wifi-resources</module>
+        <module>wifi-flume</module>
+        <module>wifi-kafka</module>
+    </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <!--定义版本参数-->
+        <cdh.version>cdh5.14.0</cdh.version>
+        <junit.version>4.12</junit.version>
+        <org.slf4j.version>1.7.5</org.slf4j.version>
+        <zookeeper.version>3.4.5</zookeeper.version>
+        <scala.version>2.10.5</scala.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.22</version>
+            <scope>provided</scope>
+        </dependency>
+
+    </dependencies>
+
+
+    <!--加入Akka源 cloudera -->
+    <repositories>
+        <!-- <repository>
+           <id>Akka repository</id>
+           <url>http://repo.akka.io/releases</url>
+         </repository>-->
+        <repository>
+            <id>cloudera</id>
+            <url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>
+        </repository>
+
+    </repositories>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <!--jar打包插件-->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <configuration>
+                        <archive>
+                            <manifest>
+                                <!--类路径添加的位置-->
+                                <addClasspath>true</addClasspath>
+                                <classpathPrefix>jars/</classpathPrefix>
+                                <mainClass></mainClass>
+                            </manifest>
+                        </archive>
+                    </configuration>
+                </plugin>
+                <!--jar依赖插件-->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>copy-dependencies</id>
+                            <phase>prepare-package</phase>
+                            <goals>
+                                <goal>copy-dependencies</goal>
+                            </goals>
+                            <configuration>
+                                <!--拷贝依赖输出的位置，需要和上面一致-->
+                                <outputDirectory>
+                                    ${project.build.directory}/jars
+                                </outputDirectory>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>2.7</version>
+                    <configuration>
+                        <encoding>UTF-8</encoding>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+</project>

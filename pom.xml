@@ -13,6 +13,8 @@
         <module>wifi-resources</module>
         <module>wifi-flume</module>
         <module>wifi-kafka</module>
+        <module>wifi-es</module>
+        <module>wifi-spark</module>
     </modules>
 
     <properties>
@@ -20,12 +22,19 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <!--定义版本参数-->
-        <cdh.version>cdh5.14.0</cdh.version>
+        <cdh.version>cdh5.12.1</cdh.version>
         <junit.version>4.12</junit.version>
         <org.slf4j.version>1.7.5</org.slf4j.version>
         <zookeeper.version>3.4.5</zookeeper.version>
         <scala.version>2.10.5</scala.version>
     </properties>
+    <!--加入Akka源 cloudera -->
+    <repositories>
+        <repository>
+            <id>cloudera</id>
+            <url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>
+        </repository>
+    </repositories>
 
     <dependencies>
         <dependency>
@@ -43,19 +52,6 @@
 
     </dependencies>
 
-
-    <!--加入Akka源 cloudera -->
-    <repositories>
-        <!-- <repository>
-           <id>Akka repository</id>
-           <url>http://repo.akka.io/releases</url>
-         </repository>-->
-        <repository>
-            <id>cloudera</id>
-            <url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>
-        </repository>
-
-    </repositories>
 
     <build>
         <pluginManagement>

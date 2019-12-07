@@ -14,7 +14,9 @@
     <properties>
         <es.spark.version>6.2.3</es.spark.version>
         <spark.version>1.6.0</spark.version>
+        <!-- cdh版本1.6.0-cdh5.12.1 存在hive的bigint无法对应sparksql的LongDataType-->
         <cdh.spark.version>${spark.version}-${cdh.version}</cdh.spark.version>
+        <!--<cdh.spark.version>2.1.1</cdh.spark.version>-->
     </properties>
 
 <dependencies>
@@ -23,10 +25,39 @@
         <artifactId>wifi-common</artifactId>
         <version>1.0-SNAPSHOT</version>
     </dependency>
+    <dependency>
+        <groupId>com.jj.wifi</groupId>
+        <artifactId>wifi-es</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </dependency>
     <!-- spark使用cdh版本的依赖 -->
     <dependency>
         <groupId>org.apache.spark</groupId>
         <artifactId>spark-core_2.10</artifactId>
+        <version>${cdh.spark.version}</version>
+        <exclusions>
+            <exclusion>
+                <artifactId>scala-reflect</artifactId>
+                <groupId>org.scala-lang</groupId>
+            </exclusion>
+            <exclusion>
+                <artifactId>zookeeper</artifactId>
+                <groupId>org.apache.zookeeper</groupId>
+            </exclusion>
+            <exclusion>
+                <artifactId>scala-library</artifactId>
+                <groupId>org.scala-lang</groupId>
+            </exclusion>
+        </exclusions>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.spark</groupId>
+        <artifactId>spark-sql_2.10</artifactId>
+        <version>${cdh.spark.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.spark</groupId>
+        <artifactId>spark-hive_2.10</artifactId>
         <version>${cdh.spark.version}</version>
     </dependency>
     <dependency>
@@ -38,11 +69,34 @@
         <groupId>org.apache.spark</groupId>
         <artifactId>spark-streaming-kafka_2.10</artifactId>
         <version>${cdh.spark.version}</version>
+        <exclusions>
+            <exclusion>
+                <artifactId>scala-library</artifactId>
+                <groupId>org.scala-lang</groupId>
+            </exclusion>
+        </exclusions>
     </dependency>
+    <!--<dependency>
+        <groupId>org.apache.spark</groupId>
+        <artifactId>spark-streaming-kafka-0-10_2.10</artifactId>
+        <version>${cdh.spark.version}</version>
+        <exclusions>
+            <exclusion>
+                <artifactId>scala-library</artifactId>
+                <groupId>org.scala-lang</groupId>
+            </exclusion>
+        </exclusions>
+    </dependency>-->
     <dependency>
         <groupId>org.elasticsearch</groupId>
         <artifactId>elasticsearch-spark-13_2.10</artifactId>
         <version>${es.spark.version}</version>
+        <exclusions>
+            <exclusion>
+                <artifactId>scala-library</artifactId>
+                <groupId>org.scala-lang</groupId>
+            </exclusion>
+        </exclusions>
     </dependency>
 
 </dependencies>

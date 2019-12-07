@@ -1,5 +1,6 @@
 import com.alibaba.fastjson.JSON;
 import com.jj.wifi.es.client.ESUtils;
+import com.jj.wifi.props.kafka.ParseData;
 import com.jj.wifi.props.kafka.Props;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
@@ -21,7 +22,7 @@ public class ESUtilsTest {
     }
     @Test
     public void testConvert(){
-        Map<String, Object> map = ESUtils.convertData("{\"rksj\":\"1575204855\",\"latitude\":\"24.000000\",\"imsi\":\"000000000000000\",\"accept_message\":\"\",\"phone_mac\":\"aa-aa-aa-aa-aa-aa\",\"device_mac\":\"bb-bb-bb-bb-bb-bb\",\"message_time\":\"1789098762\",\"filename\":\"qq_source1_1111162.txt\",\"absolute_filename\":\"H:\\\\bigdata-dev\\\\ideaworkspace\\\\tanzhou\\\\wifi-root\\\\wifi-resources\\\\target\\\\classes\\\\test.data\\\\qq\\\\qq_source1_1111162.txt\",\"phone\":\"18609765432\",\"device_number\":\"32109231\",\"imei\":\"000000000000000\",\"id\":\"5b226541565541b2a2de18a3ef4bbf39\",\"collect_time\":\"1557305988\",\"send_message\":\"\",\"table\":\"qq\",\"object_username\":\"judy\",\"longitude\":\"23.000000\",\"username\":\"andiy\"}");
+        Map<String, Object> map = ParseData.convertData("{\"rksj\":\"1575204855\",\"latitude\":\"24.000000\",\"imsi\":\"000000000000000\",\"accept_message\":\"\",\"phone_mac\":\"aa-aa-aa-aa-aa-aa\",\"device_mac\":\"bb-bb-bb-bb-bb-bb\",\"message_time\":\"1789098762\",\"filename\":\"qq_source1_1111162.txt\",\"absolute_filename\":\"H:\\\\bigdata-dev\\\\ideaworkspace\\\\tanzhou\\\\wifi-root\\\\wifi-resources\\\\target\\\\classes\\\\test.data\\\\qq\\\\qq_source1_1111162.txt\",\"phone\":\"18609765432\",\"device_number\":\"32109231\",\"imei\":\"000000000000000\",\"id\":\"5b226541565541b2a2de18a3ef4bbf39\",\"collect_time\":\"1557305988\",\"send_message\":\"\",\"table\":\"qq\",\"object_username\":\"judy\",\"longitude\":\"23.000000\",\"username\":\"andiy\"}");
         System.out.println(map);
     }
     @Test
